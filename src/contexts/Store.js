@@ -14,8 +14,31 @@ export const StoreProvider = ({ children }) => {
   }, []);
 
   // TODO: Update the method below to return the latest featured article from the list of articles
+  useEffect(() => {
+    getFeatured();
+  }, []);
+  //Setting latest to be the first index of a filtered array of featured articles. Then using moment to compare dates and return latest 1.
   const getFeatured = () => {
-    return null;
+    const moment = require(`moment`);
+    const featuredArticlesArray = articles.filter((article) => {
+      return article.fields.featured === true;
+    });
+    console.log(featuredArticlesArray);
+    if (featuredArticlesArray.length === 0) {
+      return null;
+    }
+    let latestArticle = featuredArticlesArray[0];
+    let latestArticleDate = moment(latestArticle.fields.date);
+
+    for (let i = 1; i < featuredArticlesArray.length; i++) {
+      let articleDate = moment(featuredArticlesArray[i].fields.date);
+      if (articleDate.isAfter(latestArticleDate)) {
+        latestArticleDate = articleDate;
+        latestArticle = featuredArticlesArray[i];
+      }
+    }
+    console.log("latest Article: ", latestArticle);
+    return latestArticle;
   };
 
   return (

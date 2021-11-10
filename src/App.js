@@ -1,14 +1,12 @@
 import GlobalStyle from "./base-styles";
-import { useStore } from "./contexts/Store";
 
 import Container from "./components/Container";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ArticleCard from "./components/ArticleCard";
 
 function App() {
-  const store = useStore();
-
-  console.log("TODO: use the store to create the base UI", store);
+  //I want the context to go directly to ArticleCard so only the components who need access to the information has
 
   return (
     <>
@@ -18,7 +16,7 @@ function App() {
 
         {/* TODO: Blog things goes here. Use the components folder! */}
         <Container>
-          <h1>Hello 🌎</h1>
+          <ArticleCard />
         </Container>
 
         <Footer />
